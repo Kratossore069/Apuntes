@@ -1,40 +1,38 @@
 ### Crear usuarios y eliminarlos.
 
-# encoding: utf-8
-
 puts "Bienvenido al programa de creación y eliminación de usuarios."
 
-puts "Y para crear usuarios, N para eliminarlos, S para salir del programa."
+puts "C para crear usuarios."
+
+puts "E para eliminarlos."
+
+puts "S para salir del programa."
 
 el = gets.chomp
 
-if el == "y" || el == "Y"
+if el == "C" || el == "c"
 
 	puts "Nombre del usuario a crear: "
 
 	nom = gets.chomp
 
-	cre = `useradd #{nom}`
+	`useradd #{nom}`
 
-	pa = `passwd #{nom}`
+	`passwd #{nom}`
 
-	fu = `mkdir /home/#{nom}`
+	`mkdir /home/#{nom}`
 
-	kj = `chown -R #{nom} /home/#{nom}`
-
-	puts "#{cre}, #{pa}, #{fu}, #{kj}"
+	`chown -R #{nom} /home/#{nom}`
 
 	puts "Usuario #{nom} creado."
 
-elsif el == "n" || el == "N"
+elsif el == "E" || el == "e"
 
 	puts "Nombre del usuario a eliminar: "
 
 	nom = gets.chomp
 
-	del = `userdel -r #{nom}`
-
-	puts "#{del}"
+	`userdel -r #{nom}`
 
 	puts "Usuario #{nom} eliminado."
 
