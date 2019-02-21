@@ -8,7 +8,7 @@ puts "Y para crear usuarios, N para eliminarlos, S para salir del programa."
 
 el = gets.chomp
 
-if el == "y"
+if el == "y" || el == "Y"
 
 	puts "Nombre del usuario a crear: "
 
@@ -26,7 +26,7 @@ if el == "y"
 
 	puts "Usuario #{nom} creado."
 
-elsif el == "n"
+elsif el == "n" || el == "N"
 
 	puts "Nombre del usuario a eliminar: "
 
@@ -38,7 +38,7 @@ elsif el == "n"
 
 	puts "Usuario #{nom} eliminado."
 
-elsif el == "s"
+elsif el == "s" || el == "S"
 
 	puts "Saliendo..."
 
