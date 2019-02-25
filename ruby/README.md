@@ -21,39 +21,39 @@ el = gets.chomp
 if el == "c" || el == "C"
 
     puts "Nombre del usuario a crear: "
-    
+
     nom = gets.chomp
 
     `useradd #{nom}`
-    
+
     `passwd #{nom}`
-    
+
     `mkdir /home/#{nom}`
-    
+
     `chown -R #{nom} /home/#{nom}`
-    
+
     #puts "#{cre}, #{pa}, #{fu}, #{kj}"
-    
+
     puts "Usuario #{nom} creado."
-    
-    
+
+
 elsif el == "e" || el == "E"
 
     puts "Nombre del usuario a eliminar: "
-    
+
     nom = gets.chomp
-    
+
     del = `userdel -r #{nom}`
-    
+
     puts "#{del}"
-    
+
     puts "Usuario #{nom} eliminado."
-    
+
 
 elsif el == "s" || el == "S"
 
     puts "Saliendo..."
-    
+
 end
 
 puts "Así queda la carpeta /home/."
@@ -67,27 +67,55 @@ puts "#{casa}"
 # encoding: utf-8
 
 elec = ARGV[0].to_s
-nombre = ARGV[1].to_s
-pass = ARGV[2].to_i
 
-if elec == "crear"
+def crear
+
+  nombre = ARGV[1].to_s
+
   puts "Creando usuario #{nombre}."
+
   `useradd #{nombre}`
-  `passwd #{pass}`
+
+  `passwd #{nombre}`
+
   `mkdir /home/#{nombre}`
+
   `chown -R #{nombre} /home/#{nombre}`
+
   puts "Usuario #{nombre} creado."
 
-elsif elec == "eliminar"
+end
+
+def eliminar
+
+  nombre = ARGV[1].to_s
+
   puts "Eliminando usuario #{nombre}."
+
   `userdel -r #{nombre}`
+
   puts "Usuario #{nombre} eliminado."
 
-else
-  puts "Salir. Comando no conocido."
 end
+
+if elec == "crear" || elec == "on"
+
+  crear
+
+elsif elec == "eliminar" || elec == "off"
+
+  eliminar
+
+else
+
+  puts "Salir. Comando no conocido."
+
+end
+
 todos = `ls /home/`
+
 puts "Así queda la lista de usuarios."
+
 puts "#{todos}"
 
 ### Crear y eliminar carpetas.
