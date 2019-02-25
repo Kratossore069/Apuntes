@@ -1,46 +1,66 @@
 ### Crear usuarios y eliminarlos.
 
+# encoding: utf-8
+
 puts "Bienvenido al programa de creación y eliminación de usuarios."
 
-puts "C para crear usuarios."
+puts "Estos son los usuarios que existen en el sistema."
 
-puts "E para eliminarlos."
+home = `ls /home/`
 
-puts "S para salir del programa."
+puts "#{home}"
+
+puts "* C, para CREAR usuarios"
+
+puts "* E, para ELIMINAR eliminarlos"
+
+puts "* S, para SALIR del programa."
 
 el = gets.chomp
 
-if el == "C" || el == "c"
+if el == "c" || el == "C"
 
-	puts "Nombre del usuario a crear: "
+    puts "Nombre del usuario a crear: "
+    
+    nom = gets.chomp
 
-	nom = gets.chomp
+    `useradd #{nom}`
+    
+    `passwd #{nom}`
+    
+    `mkdir /home/#{nom}`
+    
+    `chown -R #{nom} /home/#{nom}`
+    
+    #puts "#{cre}, #{pa}, #{fu}, #{kj}"
+    
+    puts "Usuario #{nom} creado."
+    
+    
+elsif el == "e" || el == "E"
 
-	`useradd #{nom}`
-
-	`passwd #{nom}`
-
-	`mkdir /home/#{nom}`
-
-	`chown -R #{nom} /home/#{nom}`
-
-	puts "Usuario #{nom} creado."
-
-elsif el == "E" || el == "e"
-
-	puts "Nombre del usuario a eliminar: "
-
-	nom = gets.chomp
-
-	`userdel -r #{nom}`
-
-	puts "Usuario #{nom} eliminado."
+    puts "Nombre del usuario a eliminar: "
+    
+    nom = gets.chomp
+    
+    del = `userdel -r #{nom}`
+    
+    puts "#{del}"
+    
+    puts "Usuario #{nom} eliminado."
+    
 
 elsif el == "s" || el == "S"
 
-	puts "Saliendo..."
-
+    puts "Saliendo..."
+    
 end
+
+puts "Así queda la carpeta /home/."
+
+casa = `ls /home/`
+
+puts "#{casa}"
 
 ### Crear y eliminar carpetas.
 
