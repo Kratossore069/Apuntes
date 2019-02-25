@@ -62,6 +62,34 @@ casa = `ls /home/`
 
 puts "#{casa}"
 
+### Crear usuarios (versión 2).
+
+# encoding: utf-8
+
+elec = ARGV[0].to_s
+nombre = ARGV[1].to_s
+pass = ARGV[2].to_i
+
+if elec == "crear"
+  puts "Creando usuario #{nombre}."
+  `useradd #{nombre}`
+  `passwd #{pass}`
+  `mkdir /home/#{nombre}`
+  `chown -R #{nombre} /home/#{nombre}`
+  puts "Usuario #{nombre} creado."
+
+elsif elec == "eliminar"
+  puts "Eliminando usuario #{nombre}."
+  `userdel -r #{nombre}`
+  puts "Usuario #{nombre} eliminado."
+
+else
+  puts "Salir. Comando no conocido."
+end
+todos = `ls /home/`
+puts "Así queda la lista de usuarios."
+puts "#{todos}"
+
 ### Crear y eliminar carpetas.
 
 # encoding: utf-8
