@@ -72,11 +72,13 @@ def crear
 
   nombre = ARGV[1].to_s
 
+  pas = ARGV[2].to_s
+
   puts "Creando usuario #{nombre}."
 
   `useradd #{nombre}`
 
-  `passwd #{nombre}`
+  `echo "#{nombre}:#{pas}" | chpasswd`
 
   `mkdir /home/#{nombre}`
 
@@ -98,7 +100,13 @@ def eliminar
 
 end
 
-if elec == "crear" || elec == "on"
+if ARGV.empty?
+
+  puts "INSTRUCCIONES DE USO"
+
+  puts "Pulse crear para crear un usuario, eliminar para eliminarlo ó salir para salir del programa."
+
+elsif elec == "crear" || elec == "on"
 
   crear
 
@@ -109,7 +117,6 @@ elsif elec == "eliminar" || elec == "off"
 else
 
   puts "Salir. Comando no conocido."
-
 end
 
 todos = `ls /home/`
@@ -117,6 +124,7 @@ todos = `ls /home/`
 puts "Así queda la lista de usuarios."
 
 puts "#{todos}"
+
 
 ### Crear y eliminar carpetas.
 
